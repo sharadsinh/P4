@@ -11,7 +11,7 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        //$all_list = new \App\List();
+        $all_list = new \App\List();
         //$list_id = \App\List::where('list_name','=','Walmart')->pluck('id');
     //     DB::table('items')->insert([
     //        'created_at' => Carbon\Carbon::now()->toDateTimeString(),

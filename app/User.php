@@ -36,4 +36,10 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function stores() {
+        #Store has many items
+        #Define one-to-many relationship
+        return $this->belongsToMany('\App\Store')->withTimestamps();
+    }
 }

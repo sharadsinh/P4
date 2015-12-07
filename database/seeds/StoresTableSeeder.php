@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ListsTableSeeder extends Seeder
+class StoresTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,22 +11,22 @@ class ListsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('lists')->insert([
+        DB::table('stores')->insert([
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'list_name' => 'Walmart',
+            'store_name' => 'Walmart',
         ]);
 
-        DB::table('lists')->insert([
+        DB::table('stores')->insert([
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'list_name' => 'Whole Foods',
+            'store_name' => 'Whole Foods',
         ]);
 
-        DB::table('lists')->insert([
+        DB::table('stores')->insert([
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-            'list_name' => 'Target',
+            'store_name' => 'Target',
         ]);
     }
 }

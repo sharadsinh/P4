@@ -25,6 +25,7 @@
                 <a href="#">Delete</a>
             @endforeach
         </div>
+        
     @endif
 
     @if(isset($items))

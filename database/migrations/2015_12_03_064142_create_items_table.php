@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->string('item_name');
             $table->string('quantity')->nullable();
             $table->string('store_aisle_num')->nullable();
+            $table->boolean('checked');
             $table->timestamps();
         });
     }

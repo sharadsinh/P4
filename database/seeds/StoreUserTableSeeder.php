@@ -27,7 +27,6 @@ class StoreUserTableSeeder extends Seeder
                 # Connect this store to this user
                 $user->stores()->save($store);
             }
-
         }
     }
 }

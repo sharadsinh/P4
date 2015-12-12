@@ -20,6 +20,7 @@ class ItemsTableSeeder extends Seeder
            'quantity' => '2 Gallon',
            'store_aisle_num' => '14a',
            'store_id' => $store_id,
+           'checked' => false,
        ]);
 
        $store_id = \App\Store::where('store_name','=','Walmart')->pluck('id');
@@ -30,6 +31,7 @@ class ItemsTableSeeder extends Seeder
           'quantity' => '3 lb',
           'store_aisle_num' => '4',
           'store_id' => $store_id,
+          'checked' => true,
       ]);
 
       $store_id = \App\Store::where('store_name','=','Walmart')->pluck('id');
@@ -40,6 +42,7 @@ class ItemsTableSeeder extends Seeder
          'quantity' => '2 lb',
          'store_aisle_num' => '2',
          'store_id' => $store_id,
+         'checked' => false,
      ]);
     }
 }

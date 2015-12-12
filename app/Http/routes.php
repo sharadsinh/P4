@@ -33,13 +33,20 @@ Route::get('/signup', 'SignupController@getIndex');
 
 /*
 |--------------------------------------------------------------------------
-| /list
+| /store
 |--------------------------------------------------------------------------
 */
-Route::get('/list', 'ListController@getIndex');
-//Show form to create list
-Route::get('/list/create-list', 'ListController@getCreateList');
-
+Route::get('/store', 'StoreController@getIndex');
+//Show form to create store
+Route::get('/store/create-store', 'StoreController@getCreateStore');
+Route::post('/store/create-store', 'StoreController@postCreateStore');
+Route::get('/store/{id?}/create-item', 'StoreController@getCreateItem');
+Route::post('/store/create-item', 'StoreController@postCreateItem');
+Route::get('/store/{id?}/items', 'StoreController@getItems');
+Route::get('/store/{id?}/edit','StoreController@getEdit');
+Route::post('/store/edit','StoreController@postEdit');
+Route::get('/store/edit-item/{id?}','StoreController@getEditItem');
+Route::post('/store/edit-item','StoreController@postEditItem');
 /*
 |--------------------------------------------------------------------------
 | Test database connection

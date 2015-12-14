@@ -43,7 +43,7 @@
         <footer>
             &copy; {{ date('Y') }} &nbsp;&nbsp;
             <a href='https://github.com/sharadsinh/P4' class='fa fa-github' target='_blank'> View on Github</a> &nbsp;&nbsp;
-            <a href='http://p4.learn4ever.me/' class='fa fa-link' target='_blank'> View Live</a>
+            <a href='http://p4.learnforever.me/' class='fa fa-link' target='_blank'> View Live</a>
         </footer>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

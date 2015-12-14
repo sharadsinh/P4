@@ -84,7 +84,9 @@ class StoreController extends Controller
      public function getItems($id=null) {
          $items = \App\Item::where('store_id','=',$id)->orderBy('item_name','ASC')->get();
 
-         return view ('stores.show')->with('items',$items);
+         return view ('stores.show')
+            ->with('items',$items)
+            ->with('store_id',$id);
      }
 
      public function getCreateItem($id=null)
@@ -120,9 +122,35 @@ class StoreController extends Controller
 
         \Session::flash('flash_message', 'Item added to store!');
 
-        return redirect('/store');
+        //return redirect('/store');
+        return redirect('/store/'.$item->store_id.'/items');
     }
 
+    public function getEditItem($id=null) {
+        $item = \App\Item::find($id);
+
+        return view ('stores.edititem')->with('item',$item);
+    }
+
+    public function postEditItem(Request $request) {
+        //Validate the request for the required feilds
+        $this->validate(
+            $request,
+            [
+                'item_name' => 'required',
+            ]
+        );
+
+        $item = \App\Item::find($request->id);
+        $item->item_name=$request->item_name;
+        $item->quantity=$request->item_qty;
+        $item->store_aisle_num=$request->item_store_aisle;
+        $item->save();
+
+        \Session::flash('flash_message', 'Item detail updated.');
+
+        return redirect('/store/'.$item->store_id.'/items');
+    }
 
 
     public function store(Request $request)

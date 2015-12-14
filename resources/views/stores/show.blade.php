@@ -8,6 +8,10 @@
 
     <h1>Stores</h1>
 
+    <div>
+        <a href='/store/create-store'>Create Store</a>
+    </div>
+
     <?php $stores = \App\Store::orderBy('id','DESC')->get(); ?>
 
     {{-- You can add code in blade showed in following link. Refer reply by giannia christofakis:
@@ -25,17 +29,24 @@
                 <a href="#">Delete</a>
             @endforeach
         </div>
-        
+
     @endif
 
     @if(isset($items))
+
+
+        <div>
+            <a href='/store/{{$store_id}}/create-item'>Add Item</a>
+        </div>
+
+        
         <ul class="list-group">
             @foreach ($items as $item)
             <a href="#" class="list-group-item">
                 <h4 class="list-group-item-heading">{{ $item->item_name }}</h4>
                 <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
                 <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p>
-                <a href="#">Edit</a>
+                <a href='/store/edit-item/{{$item->id}}'>Edit</a>
                 <a href="#">Delete</a>
             </a>
             @endforeach

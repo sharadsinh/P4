@@ -6,6 +6,15 @@
     <h1>Edit store detail</h1>
 
 @section('content')
+    {{-- if validation fails following block will show the requirement in the page --}}
+    @if(count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+    
     <form method='POST' action='/store/edit'>
 
       <input type='hidden' value='{{ csrf_token() }}' name='_token'>
@@ -23,6 +32,5 @@
 
       <button type="submit" class="btn btn-primary">Update</button>
     </form>
-
 
 @stop

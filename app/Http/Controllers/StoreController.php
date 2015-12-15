@@ -83,18 +83,18 @@ class StoreController extends Controller
 
      public function getDeleteStore($id=null) {
 
-         $items = \App\Item::where('store_id','=',$id)->get();
-
-         foreach($items as $item) {
-             $item->delete();
-         }
+        //  $items = \App\Item::where('store_id','=',$id)->get();
+         //
+        //  foreach($items as $item) {
+        //      $item->delete();
+        //  }
 
         $store = \App\Store::find($id);
 
 
-        // if($store->items()) {
-        //     $store->items()->detach();
-        // }
+        if($store->users()) {
+            $store->users()->detach();
+        }
         $store->delete();
 
         return redirect('/store');

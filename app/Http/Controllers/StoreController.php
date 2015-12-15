@@ -72,7 +72,7 @@ class StoreController extends Controller
              ]
          );
 
-         $store = \App\Store::find($request->id);
+        $store = \App\Store::find($request->id);
         $store->store_name=$request->store_name;
         $store->save();
 
@@ -80,6 +80,24 @@ class StoreController extends Controller
 
         return redirect('/store');
      }
+
+     public function getDeleteStore($id=null) {
+
+        $store = \App\Store::find($id);
+
+        if($store->items()) {
+            $store->items()->detach();
+        }
+        $store->delete();
+
+        return redirect('/store');
+     }
+
+    //  $items = \App\Item::where('store_id','=',$id)->get();
+    //
+    // foreach($items as $item) {
+    //     $item->delete();
+    // }
 
      public function getItems($id=null) {
          $items = \App\Item::where('store_id','=',$id)->orderBy('item_name','ASC')->get();
@@ -152,6 +170,11 @@ class StoreController extends Controller
         return redirect('/store/'.$item->store_id.'/items');
     }
 
+    public function getDeleteItem($id=null) {
+        $item = \App\Item::find($id);
+        $item->delete();
+        return redirect('/store/'.$item->store_id.'/items');
+    }
 
     public function store(Request $request)
     {

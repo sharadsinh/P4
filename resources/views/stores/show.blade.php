@@ -26,20 +26,17 @@
             @foreach($stores as $store)
                 <a href='/store/{{$store->id}}/items' class="list-group-item active">{{ $store->store_name }}</a>
                 <a href='/store/{{$store->id}}/edit'>Edit</a>
-                <a href="#">Delete</a>
+                <a href='/store/{{$store->id}}/delete-store'>Delete</a>
             @endforeach
         </div>
 
     @endif
 
     @if(isset($items))
-
-
         <div>
             <a href='/store/{{$store_id}}/create-item'>Add Item</a>
         </div>
 
-        
         <ul class="list-group">
             @foreach ($items as $item)
             <a href="#" class="list-group-item">
@@ -47,7 +44,7 @@
                 <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
                 <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p>
                 <a href='/store/edit-item/{{$item->id}}'>Edit</a>
-                <a href="#">Delete</a>
+                <a href='/store/delete-item/{{$item->id}}'>Delete</a>
             </a>
             @endforeach
         </ul>

@@ -18,7 +18,6 @@ class ConnetStoresAndItems extends Migration
 
              # This field `store_id` is a foreign key that connects to the `id` field in the `stores` table
              $table->foreign('store_id')->references('id')->on('stores');
-
          });
      }
 

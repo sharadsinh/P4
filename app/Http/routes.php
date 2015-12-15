@@ -47,6 +47,10 @@ Route::get('/store/{id?}/edit','StoreController@getEdit');
 Route::post('/store/edit','StoreController@postEdit');
 Route::get('/store/edit-item/{id?}','StoreController@getEditItem');
 Route::post('/store/edit-item','StoreController@postEditItem');
+Route::get('/store/delete-item/{id?}','StoreController@getDeleteItem');
+Route::get('/store/delete-item/{id?}','StoreController@getDeleteItem');
+Route::get('/store/{id?}/delete-store','StoreController@getDeleteStore');
+
 /*
 |--------------------------------------------------------------------------
 | Test database connection

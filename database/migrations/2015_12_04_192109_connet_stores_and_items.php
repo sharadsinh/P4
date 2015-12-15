@@ -17,7 +17,7 @@ class ConnetStoresAndItems extends Migration
              $table->integer('store_id')->unsigned();
 
              # This field `store_id` is a foreign key that connects to the `id` field in the `stores` table
-             $table->foreign('store_id')->references('id')->on('stores');
+             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
          });
      }
 

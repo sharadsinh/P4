@@ -109,20 +109,16 @@ class StoreController extends Controller
      }
 
      public function postShareStorelist(Request $request) {
-        //  $user = \App\User::where('email','=',$request->email)->first();
-        //  $userid = $user->id;
-
-
 
          $this->validate(
 
              $request,
              [
-                 'email' => 'required|email|max:255|exists:users,email'
+                 'email' => 'required|email|max:255|exists:users,email|unique:store_user,store_id,12,user_id,2''
 
              ]
          );
-         //|unique:store_user,store_id,12,user_id,2',
+         |unique:store_user,store_id,12,user_id,2',
          $store = \App\Store::find($request->store_id);
          $user = \App\User::where('email','=',$request->email)->first();
 

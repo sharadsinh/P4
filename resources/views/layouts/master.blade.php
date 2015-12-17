@@ -29,14 +29,28 @@
         <header>
             <a href='/'>
             <img
-            src='/img/logo.png'
-            style='width:300px'
-            alt='P4 Logo'>
+                src='/img/logo.png'
+                style='width:300px'
+                alt='P4 Logo'>
             </a>
         </header>
 
         <section>
             {{-- Main page content will be yielded here --}}
+
+            <nav>
+                <ul>
+                    @if(Auth::check())
+                        <li><a href='/'>Home</a></li>
+                        <li><a href='/store'>List App</a></li>
+                        <li><a href='/logout'>Log out</a></li>
+                    @else
+                        <li><a href='/'>Home</a></li>
+                        <li><a href='/login'>Log in</a></li>
+                        <li><a href='/register'>Register</a></li>
+                    @endif
+                </ul>
+            </nav>
             @yield('content')
         </section>
 

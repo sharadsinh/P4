@@ -11,46 +11,73 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
+});
+*/
+
+Route::get('/', 'WelcomeController@getIndex');
+
+/*
+|--------------------------------------------------------------------------
+| /login, /logout, /signup
+|--------------------------------------------------------------------------
+*/
+# Show login form
+Route::get('/login', 'Auth\AuthController@getLogin');
+
+# Process login form
+Route::post('/login', 'Auth\AuthController@postLogin');
+
+# Process logout
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+# Show registration form
+Route::get('/register', 'Auth\AuthController@getRegister');
+
+# Process registration form
+Route::post('/register', 'Auth\AuthController@postRegister');
+
+Route::get('/confirm-login-worked', function() {
+
+    # You may access the authenticated user via the Auth facade
+    $user = Auth::user();
+
+    if($user) {
+        echo 'You are logged in.';
+        dump($user->toArray());
+    } else {
+        echo 'You are not logged in.';
+    }
+
+    return;
+
 });
 
 /*
 |--------------------------------------------------------------------------
-| /login
-|--------------------------------------------------------------------------
-*/
-Route::get('/login', 'LoginController@getIndex');
-
-
-
-/*
-|--------------------------------------------------------------------------
-| /signup
-|--------------------------------------------------------------------------
-*/
-Route::get('/signup', 'SignupController@getIndex');
-
-/*
-|--------------------------------------------------------------------------
 | /store
+| Restricting multiple routes with Middleware
 |--------------------------------------------------------------------------
 */
-Route::get('/store', 'StoreController@getIndex');
-//Show form to create store
-Route::get('/store/create-store', 'StoreController@getCreateStore');
-Route::post('/store/create-store', 'StoreController@postCreateStore');
-Route::get('/store/{id?}/create-item', 'StoreController@getCreateItem');
-Route::post('/store/create-item', 'StoreController@postCreateItem');
-Route::get('/store/{id?}/items', 'StoreController@getItems');
-Route::get('/store/{id?}/edit','StoreController@getEdit');
-Route::post('/store/edit','StoreController@postEdit');
-Route::get('/store/edit-item/{id?}','StoreController@getEditItem');
-Route::post('/store/edit-item','StoreController@postEditItem');
-Route::get('/store/delete-item/{id?}','StoreController@getDeleteItem');
-Route::get('/store/delete-item/{id?}','StoreController@getDeleteItem');
-Route::get('/store/{id?}/delete-store','StoreController@getDeleteStore');
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/store', 'StoreController@getIndex');
+    Route::get('/store/create-store', 'StoreController@getCreateStore');
+    Route::post('/store/create-store', 'StoreController@postCreateStore');
+    Route::get('/store/{id?}/create-item', 'StoreController@getCreateItem');
+    Route::post('/store/create-item', 'StoreController@postCreateItem');
+    Route::get('/store/{id?}/items', 'StoreController@getItems');
+    Route::get('/store/{id?}/edit','StoreController@getEdit');
+    Route::post('/store/edit','StoreController@postEdit');
+    Route::get('/store/edit-item/{id?}','StoreController@getEditItem');
+    Route::post('/store/edit-item','StoreController@postEditItem');
+    Route::get('/store/delete-item/{id?}','StoreController@getDeleteItem');
+    Route::get('/store/{id?}/delete-store','StoreController@getDeleteStore');
+    Route::get('/store/item-checked/{id?}','StoreController@getItemChecked');
+    Route::get('/store/{id?}/share-storelist','StoreController@getShareStorelist');
+    Route::post('/store/share-storelist','StoreController@postShareStorelist');
+});
 /*
 |--------------------------------------------------------------------------
 | Test database connection

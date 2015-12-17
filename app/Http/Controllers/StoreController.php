@@ -44,8 +44,11 @@ class StoreController extends Controller
          $store->store_name=$request->store_name;
          $store->save();
 
+         //Adding data to related pivote table
+         $store->users()->attach(\Auth::id());
+
          //show the flash message and redirect page
-         \Session::flash('flash_message', 'New Store is Created in the list!');
+         \Session::flash('flash_message', 'New Store "'. $store->store_name. '" is Created in the list!');
 
          return redirect('/store');
      }
@@ -100,7 +103,37 @@ class StoreController extends Controller
         return redirect('/store');
      }
 
+     public function getShareStorelist($id=null) {
+         $store = \App\Store::find($id);
+         return view('stores.sharestore')->with('store',$store);
+     }
 
+     public function postShareStorelist(Request $request) {
+        //  $user = \App\User::where('email','=',$request->email)->first();
+        //  $userid = $user->id;
+
+
+
+         $this->validate(
+
+             $request,
+             [
+                 'email' => 'required|email|max:255|exists:users,email'
+
+             ]
+         );
+         //|unique:store_user,store_id,12,user_id,2',
+         $store = \App\Store::find($request->store_id);
+         $user = \App\User::where('email','=',$request->email)->first();
+
+         $store->users()->attach($user->id);
+
+
+         //show the flash message and redirect page
+         \Session::flash('flash_message', 'Store list "'. $store->store_name. '" is now shared to '. $request->email);
+
+         return redirect('/store');
+     }
 
      public function getItems($id=null) {
          $items = \App\Item::where('store_id','=',$id)->orderBy('item_name','ASC')->get();
@@ -179,9 +212,24 @@ class StoreController extends Controller
         return redirect('/store/'.$item->store_id.'/items');
     }
 
-    public function store(Request $request)
+    public function getItemChecked($id=null)
     {
-        //
+        //get item from item id
+        $item = \App\Item::find($id);
+
+        //check if item marked as checked
+        $itemChecked = $item->checked;
+
+        //toggle the value
+        if (!$itemChecked) {
+            $item->checked=true;
+        } else {
+            $item->checked=false;
+        }
+        $item->save();
+
+        \Session::flash('flash_message', 'Item detail updated.');
+        return redirect('/store/'.$item->store_id.'/items');
     }
 
     /**

@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function getIndex()
     {
         //
-        echo "This is login page";
+        return view('auth.login');
     }
 
     /**

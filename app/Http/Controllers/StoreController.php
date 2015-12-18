@@ -111,26 +111,27 @@ class StoreController extends Controller
      public function postShareStorelist(Request $request) {
 
          $this->validate(
-
              $request,
              [
-                 'email' => 'required|email|max:255|exists:users,email|unique:store_user,store_id,12,user_id,2'
-
+                 'email' => 'required|email|max:255|exists:users,email',
              ]
          );
-
          //|unique:store_user,store_id,12,user_id,2',
+
          $store = \App\Store::find($request->store_id);
-         $user = \App\User::where('email','=',$request->email)->first();
+         $user  = \App\User::where('email','=',$request->email)->first();
+
+         if($store->users->contains($user->id) && $user->stores->contains($request->store_id) ) {
+             \Session::flash('flash_message', 'Store list "'. $store->store_name. '" is already shared with '. $request->email);
+             return redirect('/store');
+         }
 
          $store->users()->attach($user->id);
 
-
-         //show the flash message and redirect page
          \Session::flash('flash_message', 'Store list "'. $store->store_name. '" is now shared to '. $request->email);
 
          return redirect('/store');
-     }
+    }
 
      public function getItems($id=null) {
          $items = \App\Item::where('store_id','=',$id)->orderBy('item_name','ASC')->get();

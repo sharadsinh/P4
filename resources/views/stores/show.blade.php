@@ -6,75 +6,115 @@
 
 @section('content')
 
-    <h1>Stores</h1>
+
 
     <?php
         $logged_in_user = \App\User::find(\Auth::id());
         $stores = $logged_in_user->stores()->orderBy('store_name','ASC')->get();
     ?>
 
-    <div>
-        <h4>Hi {{$logged_in_user->firstname}}..</h4>
-        <a href='/store/create-store'>Create Store</a>
-    </div>
+
 
     {{-- You can add code in blade showed in following link. Refer reply by giannia christofakis:
     http://stackoverflow.com/questions/13002626/laravels-blade-how-can-i-set-variables-in-a-template
     --}}
+    <div class="container-fluid">
+        <div class="row">
+            @if(sizeof($stores) == 0)
+                No stores in the list yet.
+                <a href='/store/create-store'>Create your first store list</a>
+            @else
+                {{-- SIDEBAR --}}
+                <div class="col-sm-3 col-md-3 sidebar">
+                  <ul class="nav nav-sidebar">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Stores</h3>
+                        </div>
+                        <div class="panel-body">
+                            <a href="/store/create-store">
+                                <i class="fa fa-list"></i> Create Store List
+                            </a>
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        @foreach($stores as $store)
+                            <?php
+                                $numberOfItems = DB::table('items')->where('store_id','=',$store->id)->count();
+                            ?>
+                            <div class="list-group-item padding-sm">
+                                <span class="badge">{{ $numberOfItems }}</span>
+                                <a href='/store/{{$store->id}}/items'>{{ $store->store_name }}</a>
+                                <a href="/store/{{$store->id}}/edit" style="margin-left: 10px; margin-right:3px;" data-toggle="tooltip" data-placement="bottom" title="Edit" >
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <a href='/store/{{$store->id}}/share-storelist' style="margin:3px" data-toggle="tooltip" data-placement="bottom" title="Share List">
+                                    <i class="glyphicon glyphicon-share"></i>
+                                </a>
+                                <a href='/store/{{$store->id}}/delete-store' class="confirm" style="margin:3px" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                    <i class="glyphicon glyphicon-minus-sign"></i>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                  </ul>
+              </div>
+            @endif
 
-    @if(sizeof($stores) == 0)
-        No stores in the list yet.
-        <a href='/store/create-store'>Create your first store list</a>
-    @else
-        <div class="list-group">
-            @foreach($stores as $store)
-                <?php
-                    $numberOfItems = DB::table('items')->where('store_id','=',$store->id)->count();
-                ?>
-                <div class="list-group-item padding-sm">
-                    <span class="badge">{{ $numberOfItems }}</span>
-                    <a href='/store/{{$store->id}}/items'>{{ $store->store_name }}</a>
-                    <a href="/store/{{$store->id}}/edit">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                    </a>
-                    <a href='/store/{{$store->id}}/share-storelist'>
-                        <i class="glyphicon glyphicon-share"></i>
-                    </a>
-                    <a href='/store/{{$store->id}}/delete-store'>
-                        <i class="glyphicon glyphicon-minus-sign"></i>
-                    </a>
+            @if(isset($items))
+                {{-- MAIN CONTENT --}}
+
+                <div class="col-sm-9 col-sm-offset-3 col-md-5 col-md-offset-1 main">
+                    <?php
+                        $store_name = \App\Store::find($store_id)->store_name;
+                     ?>
+                     <h2 class="page-header">{{$store_name}}</h2>
+
+                 </div>
+                 <div class="col-sm-9 col-sm-offset-3 col-md-1 col-md-offset-0 main">
+                     <a href='/store/{{$store_id}}/create-item' >
+                         <button type="button" class="btn btn-primary" style="margin-top:30px;">Add Item</button>
+                     </a>
+                  </div>
+                  <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-1 main" style="box-sizing: border-box;">
+
+
+                    <div class="row placeholders">
+
+
+                        <ul class="list-group">
+                            @foreach ($items as $item)
+                            <a href='/store/item-checked/{{$item->id}}' class="list-group-item">
+                                @if($item->checked)
+                                    <s><h4 class="list-group-item-heading">{{ $item->item_name }}</h4>
+                                    <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
+                                    <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p></s>
+                                @else
+                                    <h4 class="list-group-item-heading">{{ $item->item_name }}</h4>
+                                    <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
+                                    <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p>
+                                @endif
+
+                                <a href='/store/edit-item/{{$item->id}}'>Edit</a>
+                                <a href='/store/delete-item/{{$item->id}}'>Delete</a>
+                            </a>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            @endforeach
+            @endif
         </div>
+    </div>
+@stop
 
-        {{--
-            <div class="list-group">
-                @foreach($stores as $store)
-                    <a href='/store/{{$store->id}}/items' class="list-group-item active">{{ $store->store_name }}</a>
-                    <a href='/store/{{$store->id}}/edit'>Edit</a>
-                    <a href='/store/{{$store->id}}/delete-store'>Delete</a>
-                    <a href='/store/{{$store->id}}/share-storelist'>Share</a>
-                @endforeach
-            </div>
-        --}}
-    @endif
+@section('body')
 
-    @if(isset($items))
-        <div>
-            <a href='/store/{{$store_id}}/create-item'>Add Item</a>
-        </div>
-
-        <ul class="list-group">
-            @foreach ($items as $item)
-            <a href='/store/item-checked/{{$item->id}}' class="list-group-item">
-                <h4 class="list-group-item-heading">{{ $item->item_name }}</h4>
-                <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
-                <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p>
-                <a href='/store/edit-item/{{$item->id}}'>Edit</a>
-                <a href='/store/delete-item/{{$item->id}}'>Delete</a>
-            </a>
-            @endforeach
-        </ul>
-    @endif
-
+<SCRIPT LANGUAGE="JavaScript">
+    $(".confirm").click(function(e){
+        var r = confirm("Are you sure you want to delete the Store List? Click OK to continue or click Cancel");
+        if (r == false) {
+            e.preventDefault();
+        }
+    });
+</SCRIPT>
 @stop

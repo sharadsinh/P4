@@ -226,7 +226,7 @@ class StoreController extends Controller
         }
         $item->save();
 
-        \Session::flash('flash_message', 'Item detail updated.');
+        //\Session::flash('flash_message', 'Item detail updated.');
         return redirect('/store/'.$item->store_id.'/items');
     }
 

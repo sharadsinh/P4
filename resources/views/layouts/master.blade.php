@@ -37,6 +37,10 @@
                 <div>
                   <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
+                        <?php
+                            $logged_in_user = \App\User::find(\Auth::id());
+                        ?>
+                        <li><a href='/'><span class="glyphicon glyphicon-user"></span> Hello, {{$logged_in_user->firstname}}</a></li>
                         <li><a href='/'><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a href='/logout'><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
                     @else

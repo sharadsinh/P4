@@ -1,0 +1,24 @@
+footer {
+    position: absolute;
+    left:0;
+    bottom:0;
+    height:30px;
+    width:100%;
+    background-color:#ccc;
+    text-align:center;
+    padding:5px;
+}
+
+/*----------------------------------------------------
+Flash message
+-----------------------------------------------------*/
+.flash_message {
+    width:100%;
+    text-align:center;
+    padding:5px; 
+    /*position:fixed;*/
+    bottom:0;
+    center:0;
+    background-color:#FFFFCC;
+    font-weight:bold;
+}

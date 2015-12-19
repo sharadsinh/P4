@@ -12,7 +12,7 @@
         <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' rel='stylesheet'>
         <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet'>
         <link href='https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/lumen/bootstrap.min.css' rel='stylesheet'>
-        <link href='/css/foobooks.css' rel='stylesheet'>
+        <link href='/css/p4.css' rel='stylesheet'>
 
         {{-- Yield any page specific CSS files or anything else you might want in the <head> --}}
         @yield('head')
@@ -26,31 +26,29 @@
             </div>
         @endif
 
-        <header>
-            <a href='/'>
-            <img
-                src='/img/logo.png'
-                style='width:300px'
-                alt='P4 Logo'>
-            </a>
-        </header>
-
         <section>
             {{-- Main page content will be yielded here --}}
 
-            <nav>
-                <ul>
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/"><img style="max-width:25%; margin-top: -10px;" src="img/logo.png" alt='Grocery List'></a>
+                </div>
+                <div>
+                  <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
-                        <li><a href='/'>Home</a></li>
-                        <li><a href='/store'>List App</a></li>
-                        <li><a href='/logout'>Log out</a></li>
+                        <li><a href='/'><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href='/logout'><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
                     @else
-                        <li><a href='/'>Home</a></li>
-                        <li><a href='/login'>Log in</a></li>
-                        <li><a href='/register'>Register</a></li>
+                        <li><a href='/'><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href='/register'><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href='/login'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     @endif
-                </ul>
+                  </ul>
+                </div>
+              </div>
             </nav>
+
             @yield('content')
         </section>
 

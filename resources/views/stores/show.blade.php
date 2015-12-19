@@ -28,13 +28,35 @@
     @else
         <div class="list-group">
             @foreach($stores as $store)
-                <a href='/store/{{$store->id}}/items' class="list-group-item active">{{ $store->store_name }}</a>
-                <a href='/store/{{$store->id}}/edit'>Edit</a>
-                <a href='/store/{{$store->id}}/delete-store'>Delete</a>
-                <a href='/store/{{$store->id}}/share-storelist'>Share</a>
+                <?php
+                    $numberOfItems = DB::table('items')->where('store_id','=',$store->id)->count();
+                ?>
+                <div class="list-group-item padding-sm">
+                    <span class="badge">{{ $numberOfItems }}</span>
+                    <a href='/store/{{$store->id}}/items'>{{ $store->store_name }}</a>
+                    <a href="/store/{{$store->id}}/edit">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </a>
+                    <a href='/store/{{$store->id}}/share-storelist'>
+                        <i class="glyphicon glyphicon-share"></i>
+                    </a>
+                    <a href='/store/{{$store->id}}/delete-store'>
+                        <i class="glyphicon glyphicon-minus-sign"></i>
+                    </a>
+                </div>
             @endforeach
         </div>
 
+        {{--
+            <div class="list-group">
+                @foreach($stores as $store)
+                    <a href='/store/{{$store->id}}/items' class="list-group-item active">{{ $store->store_name }}</a>
+                    <a href='/store/{{$store->id}}/edit'>Edit</a>
+                    <a href='/store/{{$store->id}}/delete-store'>Delete</a>
+                    <a href='/store/{{$store->id}}/share-storelist'>Share</a>
+                @endforeach
+            </div>
+        --}}
     @endif
 
     @if(isset($items))
@@ -54,4 +76,5 @@
             @endforeach
         </ul>
     @endif
+
 @stop

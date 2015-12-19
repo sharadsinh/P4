@@ -32,7 +32,7 @@
             <nav class="navbar navbar-default">
               <div class="container-fluid">
                 <div class="navbar-header">
-                  <a class="navbar-brand" href="/"><img style="max-width:25%; margin-top: -10px;" src="img/logo.png" alt='Grocery List'></a>
+                  <a class="navbar-brand" href="/"><img style="max-width:25%; margin-top: -10px;" src="/img/logo.png" alt='Grocery List'></a>
                 </div>
                 <div>
                   <ul class="nav navbar-nav navbar-right">

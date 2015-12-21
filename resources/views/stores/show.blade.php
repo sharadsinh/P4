@@ -111,6 +111,20 @@
                             </div>
                             @endforeach
                         </ul>
+
+                        @if(sizeof($store_users)>1)
+                        <h4 style="text-align: center;">Store List Shared With:</h4>
+
+                            @foreach ($store_users as $store_user)
+                                <?php
+                                    $user=\App\User::find($store_user->user_id);
+                                ?>
+                                @if($user->id != \Auth::id())
+                                    <li style="text-align: center; list-style-type:none">{{$user->email}}</li>
+                                @endif
+                            @endforeach
+                        @endif
+
                     </div>
                 </div>
             @endif

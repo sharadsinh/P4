@@ -135,10 +135,14 @@ class StoreController extends Controller
 
      public function getItems($id=null) {
          $items = \App\Item::where('store_id','=',$id)->orderBy('item_name','ASC')->get();
+         $store_users = \DB::table('store_user')
+                ->where('store_id', '=', $id)
+                ->get();
 
          return view ('stores.show')
             ->with('items',$items)
-            ->with('store_id',$id);
+            ->with('store_id',$id)
+            ->with('store_users', $store_users);
      }
 
      public function getCreateItem($id=null)

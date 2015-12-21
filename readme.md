@@ -1,27 +1,35 @@
-## Laravel PHP Framework
+# Sharadsinh Vadher - DWA15 - Project-4: Grocery List App
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+### Live URL of the project:
+http://p4.learnforever.me
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### GitHub Link:
+https://github.com/sharadsinh/P4
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+### Description of the project (2-3+ sentences):
+We buys things from different stroes and many times we forget things to purchase and remember back once we come back from store. It happens with everyone..!! Our day-to-day needs are prety standard and we know what to buy from where. Basic goal of this Grocery List App is to maintain list for given store, update the items once it's purchased and collaborate list with others. Following features added to this application:
+ - Register New User
+ - Login Existing User
+ - Create New Store List
+ - Edit Store Details
+ - Add New Item to Store List
+ - Add Quantity to the Item
+ - Add Store Aisle Number for the Item
+ - Mark Complete the Item
+ - Edit Item
+ - Delete Item
+ - See Number of Items in Store List
+ - Share Store List With Users
+ - See Shared List Users
+ - Delete Store List
 
-## Official Documentation
+### Link to screencast demo:
+Screencast demo avilable at: http://www.screencast.com/t/UEagZeQgq
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### Any details the instructor or TA needs to know, for example, test credentials:
+- jill@harvard.edu and jamal@harvard.edu created with password: helloworld
+- john@harvard.edu, thomas@harvard.edu, mary@harvard.edu, sarah@harvard.edu, linda@harvard.edu users were created as well with password: helloworld
+- Demo data loaded through seeders files
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+### A list of any plugins, libraries, packages or outside code used in the project:
+- bootstrap and jQuery used for js and css

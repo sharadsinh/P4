@@ -16,7 +16,7 @@
                 <h1>Grocery List App</h1>
                 <p class="lead">A Solution to maintain and share grocery list</p>
                 <ul class="list-unstyled">
-                    <li><img src="/img/image1.jpg" /></li>
+                    <li><img src="/img/image1.jpg" alt='Demo Screenshot'></li>
 
 
                 </ul>

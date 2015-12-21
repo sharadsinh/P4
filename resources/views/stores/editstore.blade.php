@@ -3,34 +3,56 @@
 @section('title')
     Edit store detail
 @stop
-    <h1>Edit store detail</h1>
+
 
 @section('content')
-    {{-- if validation fails following block will show the requirement in the page --}}
-    @if(count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-    
-    <form method='POST' action='/store/edit'>
 
-      <input type='hidden' value='{{ csrf_token() }}' name='_token'>
-      <input type='hidden' name='id' value='{{ $store->id }}'>
+    <div class="container">
+        <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            @include('errors')
 
-      <div class='form-group'>
-          <label>Store Name:</label>
-          <input
-              type='text'
-              id='store_name'
-              name='store_name'
-              value='{{ $store->store_name }}'
-          >
-      </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Edit store detail</div>
+                </div>
+                <div class="panel-body" >
+                    <form id="signupform" class="form-horizontal" role="form" method='POST' action='/store/edit'>
+                        {!! csrf_field() !!}
 
-      <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+                         <input type='hidden' name='id' value='{{ $store->id }}'>
+
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-md-3 control-label">* Store Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id='store_name' name="store_name" value='{{ $store->store_name }}'>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <!-- Button -->
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Update</button>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-12 control">
+                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                    * are required feilds
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @stop

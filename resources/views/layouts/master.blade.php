@@ -54,6 +54,7 @@
             </nav>
 
             @yield('content')
+
         </section>
 
         <footer>

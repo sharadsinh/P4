@@ -52,7 +52,7 @@
                                     <i class="glyphicon glyphicon-share"></i>
                                 </a>
                                 <a href='/store/{{$store->id}}/delete-store' class="confirm" style="margin:3px" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                                    <i class="glyphicon glyphicon-minus-sign"></i>
+                                    <i class="glyphicon glyphicon-trash"></i>
                                 </a>
                             </div>
                         @endforeach
@@ -81,23 +81,33 @@
 
                     <div class="row placeholders">
 
-
                         <ul class="list-group">
                             @foreach ($items as $item)
-                            <a href='/store/item-checked/{{$item->id}}' class="list-group-item">
+                            <div class="list-group-item padding-sm">
+
                                 @if($item->checked)
-                                    <s><h4 class="list-group-item-heading">{{ $item->item_name }}</h4>
-                                    <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
-                                    <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p></s>
+                                    <s><h4 class="list-group-item-heading"><a href='/store/item-checked/{{$item->id}}'>{{ $item->item_name }}</a></h4>
+                                    <p class="list-group-item-text">Qty: {{ $item->quantity }}</p></s>
+                                    <a href="/store/edit-item/{{$item->id}}" style="position: absolute;right: 45px;" data-toggle="tooltip" data-placement="bottom" title="Edit" >
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a href='/store/delete-item/{{$item->id}}' style="position: absolute;right: 20px;" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
+                                    <s><p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p></s>
                                 @else
-                                    <h4 class="list-group-item-heading">{{ $item->item_name }}</h4>
+                                    <h4 class="list-group-item-heading"><a href='/store/item-checked/{{$item->id}}'>{{ $item->item_name }}</a></h4>
                                     <p class="list-group-item-text">Qty: {{ $item->quantity }}</p>
+                                    <a href="/store/edit-item/{{$item->id}}" style="position: absolute;right: 45px;" data-toggle="tooltip" data-placement="bottom" title="Edit" >
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    <a href='/store/delete-item/{{$item->id}}' style="position: absolute;right: 20px;" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </a>
                                     <p class="list-group-item-text">Store Aisle: {{ $item->store_aisle_num }}</p>
                                 @endif
 
-                                <a href='/store/edit-item/{{$item->id}}'>Edit</a>
-                                <a href='/store/delete-item/{{$item->id}}'>Delete</a>
-                            </a>
+                            </div>
                             @endforeach
                         </ul>
                     </div>

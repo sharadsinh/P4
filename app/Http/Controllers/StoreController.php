@@ -84,6 +84,9 @@ class StoreController extends Controller
         return redirect('/store');
      }
 
+     /*
+     * DELETE STORE
+     */
      public function getDeleteStore($id=null) {
 
         //  $items = \App\Item::where('store_id','=',$id)->get();
@@ -103,11 +106,17 @@ class StoreController extends Controller
         return redirect('/store');
      }
 
+     /*
+     * SHARE STORE LIST WITH USERS
+     */
      public function getShareStorelist($id=null) {
          $store = \App\Store::find($id);
          return view('stores.sharestore')->with('store',$store);
      }
 
+     /*
+     * PROCESS FORM TO SHARE THE STORE LIST WITH USERS
+     */
      public function postShareStorelist(Request $request) {
 
          $this->validate(
@@ -121,11 +130,13 @@ class StoreController extends Controller
          $store = \App\Store::find($request->store_id);
          $user  = \App\User::where('email','=',$request->email)->first();
 
+         //Avoid resharing or self-sharing
          if($store->users->contains($user->id) && $user->stores->contains($request->store_id) ) {
              \Session::flash('flash_message', 'Store list "'. $store->store_name. '" is already shared with '. $request->email);
              return redirect('/store');
          }
 
+         //making changes to pivote table
          $store->users()->attach($user->id);
 
          \Session::flash('flash_message', 'Store list "'. $store->store_name. '" is now shared to '. $request->email);
@@ -133,6 +144,9 @@ class StoreController extends Controller
          return redirect('/store');
     }
 
+    /*
+    * SHOW ITEMS OF RELATED STORE
+    */
      public function getItems($id=null) {
          $items = \App\Item::where('store_id','=',$id)->orderBy('item_name','ASC')->get();
          $store_users = \DB::table('store_user')
@@ -145,9 +159,11 @@ class StoreController extends Controller
             ->with('store_users', $store_users);
      }
 
+     /*
+     * CREATE NEW ITEM IN STORE LIST
+     */
      public function getCreateItem($id=null)
      {
-
         $store = \App\Store::find($id);
 
         if (is_null($id)) {
@@ -156,9 +172,11 @@ class StoreController extends Controller
         }
 
         return view('stores.createitem')->with('store', $store);
-
      }
 
+     /*
+     * PROCESS FORM TO CREATE NEW ITEM
+     */
     public function postCreateItem(Request $request) {
         //Validate the request for the required feilds
         $this->validate(
@@ -182,12 +200,18 @@ class StoreController extends Controller
         return redirect('/store/'.$item->store_id.'/items');
     }
 
+    /*
+    * EDIT ITEM
+    */
     public function getEditItem($id=null) {
         $item = \App\Item::find($id);
 
         return view ('stores.edititem')->with('item',$item);
     }
 
+    /*
+    * PROCESS FORM TO EDIT THE ITEM
+    */
     public function postEditItem(Request $request) {
         //Validate the request for the required feilds
         $this->validate(
@@ -208,12 +232,18 @@ class StoreController extends Controller
         return redirect('/store/'.$item->store_id.'/items');
     }
 
+    /*
+    * DELETE ITEM
+    */
     public function getDeleteItem($id=null) {
         $item = \App\Item::find($id);
         $item->delete();
         return redirect('/store/'.$item->store_id.'/items');
     }
 
+    /*
+    * TOGGLE THE CHANGE - ITEM CHECKED OR UNCHECKED
+    */
     public function getItemChecked($id=null)
     {
         //get item from item id
@@ -232,41 +262,5 @@ class StoreController extends Controller
 
         //\Session::flash('flash_message', 'Item detail updated.');
         return redirect('/store/'.$item->store_id.'/items');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -5,15 +5,10 @@
 @stop
 
 @section('content')
-
-
-
     <?php
         $logged_in_user = \App\User::find(\Auth::id());
         $stores = $logged_in_user->stores()->orderBy('store_name','ASC')->get();
     ?>
-
-
 
     {{-- You can add code in blade showed in following link. Refer reply by giannia christofakis:
     http://stackoverflow.com/questions/13002626/laravels-blade-how-can-i-set-variables-in-a-template

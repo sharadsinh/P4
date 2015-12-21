@@ -12,8 +12,8 @@ class StoreUserTableSeeder extends Seeder
     public function run()
     {
         $users = [
-            'Jill' => ['Walmart', 'Whole Foods'],
-            'Jamal' => ['Whole Foods', 'Target'],
+            'Jill' => ['Walmart', 'Whole Foods', 'Trader Joes', 'Wegmans', 'Stop & Shop'],
+            'Jamal' => ['Whole Foods', 'Target', 'Star Market', 'RocheBros'],
         ];
 
         foreach ($users as $firstname => $stores) {

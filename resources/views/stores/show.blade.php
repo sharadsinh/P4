@@ -70,14 +70,15 @@
                      ?>
                      <h2 class="page-header">{{$store_name}}</h2>
 
-                 </div>
-                 <div class="col-sm-9 col-sm-offset-3 col-md-1 col-md-offset-0 main">
+                </div>
+
+                <div class="col-sm-9 col-sm-offset-3 col-md-1 col-md-offset-0 main">
                      <a href='/store/{{$store_id}}/create-item' >
                          <button type="button" class="btn btn-primary" style="margin-top:30px;">Add Item</button>
                      </a>
-                  </div>
-                  <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-1 main" style="box-sizing: border-box;">
+                </div>
 
+                <div class="col-sm-9 col-sm-offset-3 col-md-6 col-md-offset-1 main" style="box-sizing: border-box;">
 
                     <div class="row placeholders">
 

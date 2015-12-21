@@ -6,6 +6,9 @@ http://p4.learnforever.me
 ### GitHub Link:
 https://github.com/sharadsinh/P4
 
+### Project Planning Doc:
+https://docs.google.com/document/d/1ogNdopqQTp37K9EbHXhGlLZry7MG4Qylit1QGhHrgms/edit#
+
 ### Description of the project (2-3+ sentences):
 We buys things from different stroes and many times we forget things to purchase and remember back once we come back from store. It happens with everyone..!! Our day-to-day needs are prety standard and we know what to buy from where. Basic goal of this Grocery List App is to maintain list for given store, update the items once it's purchased and collaborate list with others. Following features added to this application:
  - Register New User
@@ -33,3 +36,4 @@ Screencast demo avilable at: http://www.screencast.com/t/UEagZeQgq
 
 ### A list of any plugins, libraries, packages or outside code used in the project:
 - bootstrap and jQuery used for js and css
+

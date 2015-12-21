@@ -56,12 +56,13 @@
             @yield('content')
 
         </section>
-
-        <footer>
-            &copy; {{ date('Y') }} &nbsp;&nbsp;
-            <a href='https://github.com/sharadsinh/P4' class='fa fa-github' target='_blank'> View on Github</a> &nbsp;&nbsp;
-            <a href='http://p4.learnforever.me/' class='fa fa-link' target='_blank'> View Live</a>
-        </footer>
+        {{--
+            <footer>
+                &copy; {{ date('Y') }} &nbsp;&nbsp;
+                <a href='https://github.com/sharadsinh/P4' class='fa fa-github' target='_blank'> View on Github</a> &nbsp;&nbsp;
+                <a href='http://p4.learnforever.me/' class='fa fa-link' target='_blank'> View Live</a>
+            </footer>
+        --}}
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
